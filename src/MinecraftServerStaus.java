@@ -18,6 +18,11 @@ public class MinecraftServerStaus {
     final private String API_ADDRESS = "https://api.mcsrvstat.us/2/";
 
     /**
+     * Stores the address of the api service for the image download (is a constant)
+     */
+    final private String IMAGE_API_ADDRESS = "https://api.mcsrvstat.us/icon/";
+
+    /**
      * Stores the path in which the program should store the files
      */
     private Path workingPath;
@@ -130,6 +135,25 @@ public class MinecraftServerStaus {
                         j++;
                     }
                 }
+            }
+        }
+    }
+
+    /**
+     * Downloads the unencrypted server-icon and stores it in the working-directory
+     *
+     * @throws IOException If an error occurs
+     */
+    public void saveIcon () throws IOException{
+        try (
+                InputStream in = new URL(this.IMAGE_API_ADDRESS + this.serverAddress).openStream();
+                OutputStream out = Files.newOutputStream(Paths.get(this.workingPath + "/icon.png"))
+
+        ) {
+            byte[] buffer = new byte[2048];
+            int bytesRead;
+            while ((bytesRead = in.read(buffer, 0, buffer.length)) > 0) {
+                out.write(buffer, 0, bytesRead);
             }
         }
     }
