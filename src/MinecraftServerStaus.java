@@ -69,6 +69,11 @@ public class MinecraftServerStaus {
         }
     }
 
+    /**
+     * Parses the data from the json file to the array
+     *
+     * @throws IOException If an error occurs
+     */
     public void parseData () throws IOException {
         try (
                 BufferedReader in = Files.newBufferedReader(Paths.get(workingPath + "/download.json"), StandardCharsets.UTF_8);
