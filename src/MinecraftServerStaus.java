@@ -157,4 +157,27 @@ public class MinecraftServerStaus {
             }
         }
     }
+
+    /**
+     * Saves server-data to a TextFile
+     *
+     * @throws IOException If an error occurs
+     */
+    public void saveToText () throws IOException{
+        try (
+                BufferedWriter out = Files.newBufferedWriter(Paths.get(this.workingPath + "/status.txt"), StandardCharsets.UTF_8)
+
+        ) {
+            String[] output = {"State", "Ip", "Port", "Ping", "Query", "Srv", "Query mismatch", "Motd animated", "Motd", "Nr of players", "Players", "Version"};
+
+            out.write("STATUS OF " + this.serverAddress.toUpperCase() + "\n \n");
+
+            for (int i = 0; i < this.data.length; i++) {
+                if (this.data[i] != null) {
+                    out.write(output[i] + ": " + this.data[i]);
+                    out.write(System.lineSeparator());
+                }
+            }
+        }
+    }
 }
