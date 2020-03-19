@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class MinecraftServerStaus {
+public class MinecraftServerStatus {
 
     /**
      * Stores the address of the Minecraft server
@@ -37,9 +37,9 @@ public class MinecraftServerStaus {
      * Constructor (String serverAddress, String folderPath)
      *
      * @param serverAddress The address of the Minecraft server as a String
-     * @param folderPath The folder in which the program should store the files as a String
+     * @param folderPath    The folder in which the program should store the files as a String
      */
-    public MinecraftServerStaus(String serverAddress, String folderPath) {
+    public MinecraftServerStatus(String serverAddress, String folderPath) {
         this.serverAddress = serverAddress;
         this.workingPath = Paths.get(folderPath);
     }
@@ -48,9 +48,9 @@ public class MinecraftServerStaus {
      * Constructor (String serverAddress, Path folderPath)
      *
      * @param serverAddress The address of the Minecraft server as a String
-     * @param folderPath The folder in which the program should store the files as a Path
+     * @param folderPath    The folder in which the program should store the files as a Path
      */
-    public MinecraftServerStaus(String serverAddress, Path folderPath) {
+    public MinecraftServerStatus(String serverAddress, Path folderPath) {
         this.serverAddress = serverAddress;
         this.workingPath = folderPath;
     }
@@ -60,7 +60,7 @@ public class MinecraftServerStaus {
      *
      * @throws IOException If an error occurs
      */
-    public void downloadJson () throws IOException {
+    public void downloadJson() throws IOException {
         try (
                 InputStream in = new URL(this.API_ADDRESS + this.serverAddress).openStream();
                 OutputStream out = Files.newOutputStream(Paths.get(this.workingPath + "/download.json"))
@@ -79,7 +79,7 @@ public class MinecraftServerStaus {
      *
      * @throws IOException If an error occurs
      */
-    public void parseData () throws IOException {
+    public void parseData() throws IOException {
         try (
                 BufferedReader in = Files.newBufferedReader(Paths.get(workingPath + "/download.json"), StandardCharsets.UTF_8);
 
@@ -96,7 +96,7 @@ public class MinecraftServerStaus {
             String[] dataTest = allData.split(",");
 
             if (dataTest[0].substring(6, dataTest[0].length() - 1).length() < 8) {
-                if (dataTest[dataTest.length-1].substring(9, dataTest[dataTest.length-1].length()).equals("false")) {
+                if (dataTest[dataTest.length - 1].substring(9, dataTest[dataTest.length - 1].length()).equals("false")) {
                     this.data[0] = String.valueOf(false);
                 }
             } else {
@@ -114,9 +114,9 @@ public class MinecraftServerStaus {
             //variable values
             for (int i = 0; i < dataTest.length; i++) {
                 if (dataTest[i].contains("\"clean\":")) { //motd
-                    if (!dataTest[i+1].contains("\"html\":")) {
+                    if (!dataTest[i + 1].contains("\"html\":")) {
                         this.data[8] = dataTest[i].substring(10, dataTest[i].length() - 1);
-                        this.data[8] += ' ' + dataTest[i+1].substring(1, dataTest[i+1].length() - 1);
+                        this.data[8] += ' ' + dataTest[i + 1].substring(1, dataTest[i + 1].length() - 1);
                     } else {
                         this.data[8] = dataTest[i].substring(10, dataTest[i].length() - 2);
                     }
@@ -144,7 +144,7 @@ public class MinecraftServerStaus {
      *
      * @throws IOException If an error occurs
      */
-    public void saveIcon () throws IOException{
+    public void saveIcon() throws IOException {
         try (
                 InputStream in = new URL(this.IMAGE_API_ADDRESS + this.serverAddress).openStream();
                 OutputStream out = Files.newOutputStream(Paths.get(this.workingPath + "/icon.png"))
@@ -163,7 +163,7 @@ public class MinecraftServerStaus {
      *
      * @throws IOException If an error occurs
      */
-    public void saveToText () throws IOException{
+    public void saveToText() throws IOException {
         try (
                 BufferedWriter out = Files.newBufferedWriter(Paths.get(this.workingPath + "/status.txt"), StandardCharsets.UTF_8)
 
