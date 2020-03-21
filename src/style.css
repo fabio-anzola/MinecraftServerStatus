@@ -1,8 +1,13 @@
-Label {
+Label, Hyperlink {
     -fx-font-family: 'Roboto', sans-serif;
     -fx-font-size: 15px;
+    -fx-text-fill: white;
 }
 
 #headerLbl {
     -fx-padding: 3;
+}
+
+.root {
+    -fx-background-image: url("images/QiXEDU.jpg");
 }

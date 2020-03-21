@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -74,10 +75,15 @@ public class MinecraftServerStatusGUI extends Application {
         Label versionLbl = new Label("version");
         HBox versionBox = new HBox(version, versionLbl);
 
-        VBox vertical = new VBox(inputBox, stateBox, ipBox, portBox, pingBox, queryBox, srvBox, queryMismatchBox, motdAnimatedBox, motdBox, nrPlayerBox, playersBox, versionBox);
+        Hyperlink sourceCode = new Hyperlink("Program and sourcecode here");
+        sourceCode.setOnAction(eventLink -> getHostServices().showDocument("https://github.com/fabio-anzola/MinecraftServerStatus"));
+        HBox srcCodeBox = new HBox(sourceCode);
+        srcCodeBox.setAlignment(Pos.CENTER);
+
+        VBox vertical = new VBox(inputBox, stateBox, ipBox, portBox, pingBox, queryBox, srvBox, queryMismatchBox, motdAnimatedBox, motdBox, nrPlayerBox, playersBox, versionBox, srcCodeBox);
         vertical.setSpacing(20);
 
-        Scene scene = new Scene(vertical, 500, 500);
+        Scene scene = new Scene(vertical, 500, 550);
         stage.setScene(scene);
         scene.getStylesheets().add("style.css");
         scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Roboto&display=swap");
