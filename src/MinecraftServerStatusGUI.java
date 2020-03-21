@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -124,6 +125,12 @@ public class MinecraftServerStatusGUI extends Application {
                 exit.setOnAction(exitEvent -> dialog.close());
             }
         };
+
+        scene.setOnKeyPressed(eventKey -> {
+            if (eventKey.getCode() == KeyCode.ENTER) {
+                start.fire();
+            }
+        });
 
         start.setOnAction(init);
 
