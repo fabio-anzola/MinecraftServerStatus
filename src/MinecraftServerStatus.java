@@ -30,7 +30,7 @@ public class MinecraftServerStatus {
     /**
      * Stores all of the data from the server
      */
-    private String[] data = new String[12];
+    protected String[] data = new String[12];
     //state, ip, port, ping, query, srv, query mismatch, motd animated, motd, nr of players, playernames, version
 
     /**

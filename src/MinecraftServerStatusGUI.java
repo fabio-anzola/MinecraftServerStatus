@@ -1,11 +1,20 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MinecraftServerStatusGUI extends Application {
 
@@ -72,6 +81,32 @@ public class MinecraftServerStatusGUI extends Application {
 
         Scene scene = new Scene(vertical, 500, 500);
         stage.setScene(scene);
+
+        EventHandler<ActionEvent> init = event -> {
+            MinecraftServerStatus connection = new MinecraftServerStatus(host.getText(), "resources");
+            try {
+                connection.downloadJson();
+                connection.parseData();
+                connection.saveToText();
+                stateLbl.setText(connection.data[0]);
+                ipLbl.setText(connection.data[1]);
+                portLbl.setText(connection.data[2]);
+                pingLbl.setText(connection.data[3]);
+                queryLbl.setText(connection.data[4]);
+                srvLbl.setText(connection.data[5]);
+                queryMismatchLbl.setText(connection.data[6]);
+                motdAnimatedLbl.setText(connection.data[7]);
+                motdLbl.setText(connection.data[8]);
+                nrPlayersLbl.setText(connection.data[9]);
+                playersLbl.setText(connection.data[10]);
+                versionLbl.setText(connection.data[11]);
+            }
+            catch (IOException e) {
+                System.out.println("error");
+            }
+        };
+
+        start.setOnAction(init);
 
         stage.show();
     }
