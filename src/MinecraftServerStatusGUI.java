@@ -21,6 +21,7 @@ public class MinecraftServerStatusGUI extends Application {
         stage.setTitle("Minecraft-Server Status");
 
         Label sourceLbl = new Label("Hostname or ip: ");
+        sourceLbl.setId("headerLbl");
         TextField host = new TextField();
         Button start = new Button("Go!");
         HBox inputBox = new HBox(sourceLbl, host, start);
@@ -78,6 +79,8 @@ public class MinecraftServerStatusGUI extends Application {
 
         Scene scene = new Scene(vertical, 500, 500);
         stage.setScene(scene);
+        scene.getStylesheets().add("style.css");
+        scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
         EventHandler<ActionEvent> init = event -> {
             MinecraftServerStatus connection = new MinecraftServerStatus(host.getText(), "resources");
