@@ -6,8 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
@@ -23,9 +22,8 @@ public class MinecraftServerStatusGUI extends Application {
 
         Label sourceLbl = new Label("Hostname or ip: ");
         TextField host = new TextField();
-        HBox inputBox = new HBox(sourceLbl, host);
-
         Button start = new Button("Go!");
+        HBox inputBox = new HBox(sourceLbl, host, start);
 
         Label state = new Label("Server state: ");
         Label stateLbl = new Label("state");
@@ -75,7 +73,7 @@ public class MinecraftServerStatusGUI extends Application {
         Label versionLbl = new Label("version");
         HBox versionBox = new HBox(version, versionLbl);
 
-        VBox vertical = new VBox(inputBox, start, stateBox, ipBox, portBox, pingBox, queryBox, srvBox, queryMismatchBox, motdAnimatedBox, motdBox, nrPlayerBox, playersBox, versionBox);
+        VBox vertical = new VBox(inputBox, stateBox, ipBox, portBox, pingBox, queryBox, srvBox, queryMismatchBox, motdAnimatedBox, motdBox, nrPlayerBox, playersBox, versionBox);
         vertical.setSpacing(20);
 
         Scene scene = new Scene(vertical, 500, 500);
@@ -87,6 +85,7 @@ public class MinecraftServerStatusGUI extends Application {
                 connection.downloadJson();
                 connection.parseData();
                 connection.saveToText();
+                connection.saveIcon();
                 stateLbl.setText(connection.data[0]);
                 ipLbl.setText(connection.data[1]);
                 portLbl.setText(connection.data[2]);
