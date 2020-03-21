@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -102,7 +101,19 @@ public class MinecraftServerStatusGUI extends Application {
                 versionLbl.setText(connection.data[11]);
             }
             catch (IOException e) {
-                System.out.println("error");
+                final Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.initOwner(stage);
+                Text errorDisplay = new Text("Sorry, something went wrong. \n Please check your input or report a bug!");
+                Button exit = new Button("Ok");
+                errorDisplay.setTextAlignment(TextAlignment.CENTER);
+                VBox screen = new VBox(errorDisplay, exit);
+                screen.setAlignment(Pos.CENTER);
+                Scene dialogScene = new Scene(screen, 250, 100);
+                dialog.setScene(dialogScene);
+                dialog.show();
+
+                exit.setOnAction(exitEvent -> dialog.close());
             }
         };
 
