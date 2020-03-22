@@ -20,75 +20,95 @@ public class MinecraftServerStatusGUI extends Application {
 
     @Override
     public void start(Stage stage) {
+        //stage title setup
         stage.setTitle("Minecraft-Server Status");
 
+        //input (label, field, button)
         Label sourceLbl = new Label("Hostname or ip: ");
         sourceLbl.setId("headerLbl");
         TextField host = new TextField();
         Button start = new Button("Go!");
         HBox inputBox = new HBox(sourceLbl, host, start);
 
+        //Server-state section
         Label state = new Label("Server state: ");
         Label stateLbl = new Label("state");
         HBox stateBox = new HBox(state, stateLbl);
 
+        //Server-ip section
         Label ip = new Label("Server-ip: ");
         Label ipLbl = new Label("ip");
         HBox ipBox = new HBox(ip, ipLbl);
 
+        //Server-port section
         Label port = new Label("Server-port: ");
         Label portLbl = new Label("port");
         HBox portBox = new HBox(port, portLbl);
 
+        //Server-ping-enabled section
         Label ping = new Label("Ping enabled: ");
         Label pingLbl = new Label("ping");
         HBox pingBox = new HBox(ping, pingLbl);
 
+        //Server-query-enabled section
         Label query = new Label("Query enabled: ");
         Label queryLbl = new Label("query");
         HBox queryBox = new HBox(query, queryLbl);
 
+        //Server-srv-record section
         Label srv = new Label("Using srv record: ");
         Label srvLbl = new Label("srv");
         HBox srvBox = new HBox(srv, srvLbl);
 
+        //Server-query-mismatch section
         Label queryMismatch = new Label("Query mismatch: ");
         Label queryMismatchLbl = new Label("query mismatch");
         HBox queryMismatchBox = new HBox(queryMismatch, queryMismatchLbl);
 
+        //Sever-animated-motd section
         Label motdAnimated = new Label("MOTD animated: ");
         Label motdAnimatedLbl = new Label("motd animated");
         HBox motdAnimatedBox = new HBox(motdAnimated, motdAnimatedLbl);
 
+        //Server-motd section
         Label motd = new Label("MOTD: ");
         Label motdLbl = new Label("motd");
         HBox motdBox = new HBox(motd, motdLbl);
 
+        //Server-nr-of-online-players section
         Label nrPlayers = new Label("Nr of online players: ");
         Label nrPlayersLbl = new Label("# players");
         HBox nrPlayerBox = new HBox(nrPlayers, nrPlayersLbl);
 
+        //Server-online-players section
         Label players = new Label("Online players: ");
         Label playersLbl = new Label("players");
         HBox playersBox = new HBox(players, playersLbl);
 
+        //Server-version section
         Label version = new Label("Server version: ");
         Label versionLbl = new Label("version");
         HBox versionBox = new HBox(version, versionLbl);
 
+        //Program-source section
         Hyperlink sourceCode = new Hyperlink("Program and sourcecode here");
         sourceCode.setOnAction(eventLink -> getHostServices().showDocument("https://github.com/fabio-anzola/MinecraftServerStatus"));
         HBox srcCodeBox = new HBox(sourceCode);
         srcCodeBox.setAlignment(Pos.CENTER);
 
+        //Main vertical Box
         VBox vertical = new VBox(inputBox, stateBox, ipBox, portBox, pingBox, queryBox, srvBox, queryMismatchBox, motdAnimatedBox, motdBox, nrPlayerBox, playersBox, versionBox, srcCodeBox);
         vertical.setSpacing(20);
 
+        //Scene setup
         Scene scene = new Scene(vertical, 500, 550);
         stage.setScene(scene);
+
+        //Stylesheets
         scene.getStylesheets().add("style.css");
         scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
+        //If GO button is pressed
         EventHandler<ActionEvent> init = event -> {
             MinecraftServerStatus connection = new MinecraftServerStatus(host.getText(), "resources");
             try {
@@ -126,14 +146,17 @@ public class MinecraftServerStatusGUI extends Application {
             }
         };
 
+        //if ENTER key is pressed
         scene.setOnKeyPressed(eventKey -> {
             if (eventKey.getCode() == KeyCode.ENTER) {
                 start.fire();
             }
         });
 
+        //map action (event) to GO button
         start.setOnAction(init);
 
+        //final show
         stage.show();
     }
 
