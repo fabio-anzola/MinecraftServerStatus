@@ -8,7 +8,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
@@ -20,8 +21,12 @@ public class MinecraftServerStatusGUI extends Application {
 
     @Override
     public void start(Stage stage) {
-        //stage title setup
+        //stage setup
         stage.setTitle("Minecraft-Server Status");
+        stage.setMinHeight(570);
+        stage.setMaxHeight(570);
+        stage.setMinWidth(500);
+        stage.setMaxWidth(1000);
 
         //input (label, field, button)
         Label sourceLbl = new Label("Hostname or ip: ");
@@ -32,7 +37,7 @@ public class MinecraftServerStatusGUI extends Application {
 
         //Server-state section
         Label state = new Label("Server state: ");
-        Label stateLbl = new Label("state");
+        Label stateLbl = new Label("");
         HBox stateBox = new HBox(state, stateLbl);
 
         //Server-ip section
@@ -42,17 +47,17 @@ public class MinecraftServerStatusGUI extends Application {
 
         //Server-port section
         Label port = new Label("Server-port: ");
-        Label portLbl = new Label("port");
+        Label portLbl = new Label("");
         HBox portBox = new HBox(port, portLbl);
 
         //Server-ping-enabled section
         Label ping = new Label("Ping enabled: ");
-        Label pingLbl = new Label("ping");
+        Label pingLbl = new Label("");
         HBox pingBox = new HBox(ping, pingLbl);
 
         //Server-query-enabled section
         Label query = new Label("Query enabled: ");
-        Label queryLbl = new Label("query");
+        Label queryLbl = new Label("");
         HBox queryBox = new HBox(query, queryLbl);
 
         //Server-srv-record section
@@ -62,32 +67,32 @@ public class MinecraftServerStatusGUI extends Application {
 
         //Server-query-mismatch section
         Label queryMismatch = new Label("Query mismatch: ");
-        Label queryMismatchLbl = new Label("query mismatch");
+        Label queryMismatchLbl = new Label("");
         HBox queryMismatchBox = new HBox(queryMismatch, queryMismatchLbl);
 
         //Sever-animated-motd section
         Label motdAnimated = new Label("MOTD animated: ");
-        Label motdAnimatedLbl = new Label("motd animated");
+        Label motdAnimatedLbl = new Label("");
         HBox motdAnimatedBox = new HBox(motdAnimated, motdAnimatedLbl);
 
         //Server-motd section
         Label motd = new Label("MOTD: ");
-        Label motdLbl = new Label("motd");
+        Label motdLbl = new Label("");
         HBox motdBox = new HBox(motd, motdLbl);
 
         //Server-nr-of-online-players section
         Label nrPlayers = new Label("Nr of online players: ");
-        Label nrPlayersLbl = new Label("# players");
+        Label nrPlayersLbl = new Label("");
         HBox nrPlayerBox = new HBox(nrPlayers, nrPlayersLbl);
 
         //Server-online-players section
         Label players = new Label("Online players: ");
-        Label playersLbl = new Label("players");
+        Label playersLbl = new Label("");
         HBox playersBox = new HBox(players, playersLbl);
 
         //Server-version section
         Label version = new Label("Server version: ");
-        Label versionLbl = new Label("version");
+        Label versionLbl = new Label("");
         HBox versionBox = new HBox(version, versionLbl);
 
         //Program-source section
